@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
+import { Link,useLocation } from "react-router-dom";
 import { ReactComponent as Merge } from "../../assets/svg/arrow-merge-symbol.svg"
 import { ReactComponent as Chart } from "../../assets/svg/bar-chart-and-polyline.svg"
 import { ReactComponent as Logo } from "../../assets/svg/bebo-logo.svg"
@@ -32,15 +33,16 @@ nav{
 }
 `
 const Header = () => {
+    let {pathname} = useLocation();
     return (
         <SHeader>
             <nav>
                 <ul className="primary-menu">
-                    <li> <Logo fill="#fff" />  </li>
-                    <li> <Chat fill="#fff" />  </li>
-                    <li> <Merge fill="#fff"/>  </li>
-                    <li> <Chart fill="#fff" />  </li>
-                </ul>
+                    <li>  <Link to="/">  <Logo fill={pathname!=="/"?"#fff":"#26CBA0"} />  </Link>  </li>
+                    <li>  <Link to="/chat">   <Chat fill={pathname!=="/chat"?"#fff":"#26CBA0"} />   </Link>  </li>
+                    <li>  <Link to="/merge">  <Merge fill={pathname!=="/merge"?"#fff":"#26CBA0"}/>   </Link>  </li>
+                    <li>  <Link to="/chart">  <Chart fill={pathname!=="/chart"?"#fff":"#26CBA0"} />   </Link>  </li>
+                </ul> 
                 <ul className="secondary-menu">
                     <li> <Help fill="#fff" />  </li>
                     <li> <LogOut fill="#fff" />  </li>
