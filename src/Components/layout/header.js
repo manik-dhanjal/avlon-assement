@@ -15,7 +15,7 @@ nav{
     left:0;
     width:70px;
     height:100%;
-    padding:30px 18px;
+    padding:20px 18px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;

@@ -1,11 +1,21 @@
 import React from 'react'
-
-const chatBox = () => {
+import styled from "styled-components"
+import MessageCreater from "../molecule/messageCreater"
+const SChatBox = styled.section`
+border-right:1px solid grey;
+display:flex;
+flex-direction:column;
+main{
+    flex-grow:2;
+}
+`
+const ChatBox = () => {
     return (
-        <div>
-            
-        </div>
+        <SChatBox>
+            <main>cas</main>
+           <MessageCreater/>
+        </SChatBox>
     )
 }
 
-export default chatBox
+export default ChatBox
