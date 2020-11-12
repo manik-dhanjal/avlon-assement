@@ -7,9 +7,10 @@ import { ReactComponent as Logo } from "../../assets/svg/bebo-logo.svg"
 import { ReactComponent as LogOut } from "../../assets/svg/door-exit.svg"
 import { ReactComponent as Help } from "../../assets/svg/help.svg"
 import { ReactComponent as Chat } from "../../assets/svg/speech-bubbles.svg"
+import { ReactComponent as Plugin } from "../../assets/svg/plugin.svg"
 const SHeader = styled.header`
 nav{
-    background:#616161;
+    background:#272c33;
     position:fixed;
     top:0;
     left:0;
@@ -42,6 +43,7 @@ const Header = () => {
                     <li>  <Link to="/chat">   <Chat fill={pathname!=="/chat"?"#fff":"#26CBA0"} />   </Link>  </li>
                     <li>  <Link to="/merge">  <Merge fill={pathname!=="/merge"?"#fff":"#26CBA0"}/>   </Link>  </li>
                     <li>  <Link to="/chart">  <Chart fill={pathname!=="/chart"?"#fff":"#26CBA0"} />   </Link>  </li>
+                    <li>  <Link to="/plugin">  <Plugin fill={pathname!=="/plugin"?"#fff":"#26CBA0"} />   </Link>  </li>
                 </ul> 
                 <ul className="secondary-menu">
                     <li> <Help fill="#fff" />  </li>

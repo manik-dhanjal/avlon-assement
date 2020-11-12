@@ -6,6 +6,7 @@ const Template = styled.div`
 display:grid;
 grid-template-columns: 75% 25%;
 grid-template-rows:100vh;
+overflow:hidden;
 `
 const ChatTemplate = () => {
     return (
