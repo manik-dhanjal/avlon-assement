@@ -12,10 +12,11 @@ input{
     width:100%;
 }
 `
-const Input = ({name,value,handleChange}) => {
+const Input = ({name,value,handleChange,placeholder}) => {
+
     return (
         <SInput className="input-container">
-            <input name={name} type="text" value={value} onChange={handleChange}/>
+            <input name={name} type="text" value={value} onChange={(e)=>handleChange(e)} placeholder={placeholder}/>
         </SInput>
     )
 }
