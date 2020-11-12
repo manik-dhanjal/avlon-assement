@@ -49,7 +49,7 @@ background:#ebeced;
 }
 @media screen and (max-width:1024px){
 position:fixed;
-right:0;
+right:-100%;
 top:0;
 height:100%;
 transition:1s ease;
