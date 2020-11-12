@@ -8,7 +8,6 @@ margin:20px 0px;
 .message-cont {
     position: relative;
     background: ${(({type})=>type==="sent"?"#B7F5E5":"white")};
-    text-align: ${(({type})=>type==="sent"?"right":"left")};
     padding: 10px 15px;
     border-radius: 6px;
     max-width:90%;

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState ,useRef} from "react";
 import styled from "styled-components";
 import Input from "../atom/input";
 import InputRadio from "../atom/inputRadio"
 import { ReactComponent as Send } from "../../assets/svg/send-button.svg";
+import { ReactComponent as Arrow } from "../../assets/svg/down-chevron.svg";
 import { useMessageUpdate} from "../context/messages.context"
 const Container = styled.div`
   width: 100%;
@@ -29,6 +30,7 @@ const Container = styled.div`
   .send-button {
     width: 50px;
     padding-bottom: 7px;
+    cursor:pointer;
     svg {
       width: 100%;
       height: 100%;
@@ -43,38 +45,59 @@ const Container = styled.div`
     font-size: 1.05em;
     cursor:pointer;
   }
-  .suggest-menu {
-    position: absolute;
-    padding:30px 20px;
-    top: ${({ state }) => (state==='active' ? "-250px" : "0")};
-    left: 0;
-    z-index: -1;
-    width: 350px;
-    box-shadow: 13px -13px 21px rgba(0, 0, 0, 0.04);
-    border-radius: 0px 8px 0px 0px;
-    transition:0.5s ease;
-    min-height:250px;
-    background:white;
-    display:flex;
+  .arrow{
+    width:20px;
+    height:20px;
     display:none;
-    ul{
-      min-width:100px;
+    svg{
+      width:100%;
+      height:100%;
+      transform:rotate(180deg)
     }
-    .search-drop{
+  }
+  @media screen and (max-width:1024px){
+    .messenger {
+      padding: 0px 10px;
+    }
+    .arrow{
+      display:block;
+    }
+    .suggestion-btn{
+      display:none;
+    }
+    .messenger input{
       font-size:14px;
-      input{
-        padding:8px 10px;
-        border-color:#e5e5e5
-      }
     }
   }
 `;
+const PopOver = styled.div`
+  padding:${({ state }) => (state==='active' ? "30px" : "0")} 20px;
+  height: ${({ state }) => (state==='active' ? "500px" : "0")};
+  overflow:hidden;
+  width: 100%;
+  box-shadow: 13px -13px 21px rgba(0, 0, 0, 0.04);
+  border-radius: 0px 8px 0px 0px;
+  transition:0.5s ease;
+  background:white;
+  display:flex;
+  ul{
+    min-width:100px;
+  }
+  .search-drop{
+    font-size:14px;
+    input{
+      padding:8px 10px;
+      border-color:#e5e5e5
+    }
+  }
+
+`
 const MessageCreater = () => {
   const [message, setMessage] = useState("");
   const [toogleSuggest, setToggleSuggest] = useState("inactive");
   const [radioBtn, setRadioBtn] = useState('greetings')
   const setMessageUpdate = useMessageUpdate();
-  console.log(toogleSuggest);
+  const arrow = useRef()
   const handleChange = (e) => {
     setMessage(e.target.value);
     
@@ -83,7 +106,6 @@ const MessageCreater = () => {
     toogleSuggest === "active"
       ? setToggleSuggest("inactive")
       : setToggleSuggest("active");
-      console.log(message);
   };
   const handleRadio = (e) =>{
     setRadioBtn(()=>e.target.value)
@@ -96,17 +118,8 @@ const MessageCreater = () => {
       console.log(message)
   }
   return (
-    <Container state={toogleSuggest}>
-      <div className="messenger">
-        <button className="suggestion-btn" onClick={handleToogle}>
-          Suggestions
-        </button>
-        <Input name="message" value={message} handleChange={handleChange} placeholder="Type a Message"/>
-        <div className="send-button" onClick={handleSubmit}>
-          <Send />
-        </div>
-      </div>
-      <div className="suggest-menu" >
+    <>
+    <PopOver state={toogleSuggest}>
         <ul onChange={handleRadio}>
           <InputRadio name="message-type" value="greetings">Greetings</InputRadio>
           <InputRadio name="message-type" value="account">Account</InputRadio>
@@ -116,8 +129,21 @@ const MessageCreater = () => {
         <div className="search-drop">
           <Input name="search" value="" placeholder="search" />
         </div>
+    </PopOver>
+    <Container >
+      <div className="messenger">
+        <button className="suggestion-btn" onClick={handleToogle}>
+          Suggestions
+        </button>
+        <div className="arrow"  onClick={handleToogle} ref={arrow}><Arrow/></div>
+        <Input name="message" value={message} handleChange={handleChange} placeholder="Type a Message"/>
+        <div className="send-button" onClick={handleSubmit}>
+          <Send />
+        </div>
       </div>
+     
     </Container>
+    </>
   );
 };
 
